@@ -21,6 +21,9 @@ router.get("/grades", function (req, res) {
 router.get("/login", function (req, res) {
     res.render("login");
 });
+router.get("/permits", function (req, res) {
+    res.render("permits");
+});
 //SHOW- DISPLAY MORE INFO ABOUT CLICKED CG
 router.get("/about", function (req, res) {
 

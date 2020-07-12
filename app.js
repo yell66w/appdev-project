@@ -16,5 +16,5 @@ indexRoutes = require("./routes/index");
 //ROUTES USAGE
 app.use(indexRoutes);
 
-
-app.listen(process.env.PORT)
+PORT = process.env.PORT
+app.listen(PORT)

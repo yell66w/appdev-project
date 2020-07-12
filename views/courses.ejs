@@ -1,0 +1,54 @@
+<%- include ('partials/header') %>
+
+
+<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('images/bg_1.jpg')">
+  <div class="container pt-3">
+    <div class="row align-items-end">
+      <div class="col-lg-7">
+        <h2 class="mb-0">Courses</h2>
+        <p>Application Development - Final Project</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="custom-breadcrumns border-bottom">
+  <div class="container">
+    <a href="/">Home</a>
+    <span class="mx-3 icon-keyboard_arrow_right"></span>
+    <span class="current">Courses</span>
+  </div>
+</div>
+
+<% 
+let images = ["cs","it","is","a","e","ba"]
+let courses = ["Computer Science","Information Technology", "Information System","Accountancy","Entrepreneurship","Business Administration"]  %>
+
+<div class="site-section">
+  <div class="container">
+    <div class="row">
+
+      <% for(let i =0; i<courses.length; i++){ %>
+
+
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="course-1-item">
+          <figure class="thumnail">
+            <a href="#"><img style="width: 500px; height: 200px; object-fit: cover;" src="images/<%- images[i] %>.jpg"
+                alt="Image" class="img-fluid"></a>
+
+            <div class="category">
+              <h3><%- courses[i] %></h3>
+            </div>
+          </figure>
+        </div>
+      </div>
+      <%  }   %>
+
+    </div>
+  </div>
+</div>
+
+
+<%- include ('partials/footer') %>

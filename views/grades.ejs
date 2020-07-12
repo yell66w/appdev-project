@@ -1,0 +1,183 @@
+<%- include ('partials/header') %>
+
+<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('/images/bg_1.jpg')">
+  <div class="container pt-3">
+    <div class="row align-items-end">
+      <div class="col-lg-7">
+        <h2 class="mb-0">Grades</h2>
+        <p>Application Development - Final Project</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="custom-breadcrumns border-bottom">
+  <div class="container">
+    <a href="/">Home</a>
+    <span class="mx-3 icon-keyboard_arrow_right"></span>
+    <span class="current">Grades</span>
+  </div>
+</div>
+
+<div class="site-section">
+  <div class="container">
+    <div class="row" id="app">
+      <div class="row justify-content-center border-bottom pb-5">
+
+        <div class="col-2">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="prelim">Prelim</span>
+            </div>
+            <input disabled type="number" style="background-color: white;" class="form-control" placeholder="0"
+              aria-label="" aria-describedby="prelim" v-model="prelims">
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="prelim">Midterms</span>
+            </div>
+            <input disabled type="number" style="background-color: white;" class="form-control" placeholder="0"
+              aria-label="" aria-describedby="prelim" v-model="midterms">
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="prelim">Prefinal</span>
+            </div>
+            <input disabled type="number" style="background-color: white;" class="form-control" placeholder="0"
+              aria-label="" aria-describedby="prelim" v-model="prefinals" value="99.99">
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="prelim">Finals</span>
+            </div>
+            <input disabled type="number" style="background-color: white;" class="form-control" placeholder="0"
+              aria-label="" aria-describedby="prelim" v-model="finals">
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="prelim">Overall</span>
+            </div>
+            <input disabled type="number" style="background-color: white;" class="form-control" placeholder="0"
+              aria-label="" aria-describedby="prelim" v-model="overall.toFixed(2)">
+          </div>
+        </div>
+      </div>
+      <div class="mt-5 mb-3 d-flex col-md-12">
+        <div class="h4 col-md-9">Lecture</div>
+        <div class="col-md-3">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="lecture">Lecture Grade</span>
+            </div>
+            <leclab-component update-who="updateLec" :percent="lecture_percentage"></leclab-component>
+          </div>
+        </div>
+
+      </div>
+
+      <table class="table table-bordered">
+
+        <tbody>
+          <template v-for="(lab,i) in lecture">
+            <tr>
+
+              <th>{{lab.name}}</th>
+              <td v-for="(sub,j) in lab.subcategory">
+                <input type="number" min='0' max='100' class="border-0 form-control shadow-none" :placeholder="sub.name"
+                  v-model="sub.score">
+              </td>
+              <td v-if="lab.subcategory.length<3">
+                <input disabled style="background-color:white" type="number" min='0' max='100'
+                  class="border-0 form-control shadow-none" placeholder="N/A">
+              </td>
+
+              <td class="d-flex justify-content-center">
+                <grade-component :lab="lab" update-who="updateLec"></grade-component>
+              </td>
+
+            </tr>
+          </template>
+
+
+
+
+
+        </tbody>
+
+      </table>
+
+      <!-- LABORATORY -->
+      <div class='col-md-12'>
+        <div class="mt-5 mb-3 d-flex">
+          <div class="h4 col-md-9">Laboratory</div>
+          <div class="col-md-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id=laboratory">Laboratory Grade</span>
+              </div>
+              <leclab-component update-who="updateLab" :percent="laboratory_percentage"></leclab-component>
+            </div>
+          </div>
+        </div>
+        <table class="table table-bordered">
+
+
+          <tbody>
+            <template v-for="(lab,i) in laboratory">
+              <tr>
+
+                <th>{{lab.name}}</th>
+                <td v-for="(sub,j) in lab.subcategory">
+                  <input type="number" min='0' max='100' class="border-0 form-control shadow-none"
+                    :placeholder="sub.name" v-model="sub.score">
+
+                </td>
+
+                <td class="d-flex justify-content-center">
+                  <grade-component :lab="lab" update-who="updateLab"></grade-component>
+                </td>
+              </tr>
+            </template>
+
+
+
+
+
+          </tbody>
+
+        </table>
+      </div>
+
+      <div class="col-md-12 d-flex justify-content-end">
+
+
+
+        <button type="button" class="btn btn-primary" v-if="p_show" @click="save(1)">Save Prelims
+          Grade</button>
+        <button type="button" class="btn btn-primary" v-if="m_show" @click="save(2)">Save Midterms
+          Grade</button>
+        <button type="button" class="btn btn-primary" v-if="pf_show" @click="save(3)">Save Pre-finals
+          Grade</button>
+        <button type="button" class="btn btn-primary" v-if="f_show" @click="save(4)">Save Finals Grade</button>
+        <button disabled type="button" class="btn btn-primary" v-if="s_show">Finished</button>
+      </div>
+
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+<%- include ('partials/footer') %>

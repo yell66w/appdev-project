@@ -17,4 +17,4 @@ indexRoutes = require("./routes/index");
 app.use(indexRoutes);
 
 PORT = process.env.PORT
-app.listen(PORT)
+app.listen(3000)
